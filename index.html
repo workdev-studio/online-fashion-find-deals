@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="hi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HerFashionFinds | Women Fashion, Sarees, Shoes & Home Deals</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased flex flex-col min-h-screen">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-rose-600 to-pink-600 text-white text-xs py-2 px-4 text-center font-medium shadow-sm">
+        ✨ Today's Special Deals: Up to 70% OFF on Sarees, Footwear & Kitchen Cutlery! ✨
+    </div>
+
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+            
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-rose-500 to-pink-500 text-white font-bold text-xl flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
+                    H
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-extrabold text-xl tracking-tight text-gray-900 leading-none">HerFashion<span class="text-rose-600">Finds</span></span>
+                    <span class="text-[10px] text-gray-400 font-medium tracking-wider uppercase">Trending Deals & Style</span>
+                </div>
+            </a>
+
+            <!-- Search Bar -->
+            <div class="hidden md:flex flex-1 max-w-md mx-4 relative">
+                <input type="text" id="searchInput" onkeyup="searchProducts()" placeholder="Saree, Dress, Shoes, Cutlery dhundhein..." class="w-full bg-gray-100 border border-gray-200 rounded-full py-2.5 pl-11 pr-4 text-sm focus:outline-none focus:border-rose-500 focus:bg-white transition-all">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-gray-400 text-sm"></i>
+            </div>
+
+            <!-- Desktop Category Nav Links -->
+            <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold text-gray-600">
+                <button onclick="filterCategory('all')" class="hover:text-rose-600 transition-colors">All Deals</button>
+                <button onclick="filterCategory('dresses')" class="hover:text-rose-600 transition-colors">Dresses</button>
+                <button onclick="filterCategory('sarees')" class="hover:text-rose-600 transition-colors">Sarees</button>
+                <button onclick="filterCategory('shoes')" class="hover:text-rose-600 transition-colors">Footwear</button>
+                <button onclick="filterCategory('cutlery')" class="hover:text-rose-600 transition-colors">Cutlery</button>
+            </nav>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobileMenuBtn" class="lg:hidden p-2 text-gray-600 hover:text-rose-600 focus:outline-none">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Search Bar -->
+        <div class="md:hidden px-4 pb-3">
+            <div class="relative w-full">
+                <input type="text" id="mobileSearchInput" onkeyup="searchProductsMobile()" placeholder="Search products..." class="w-full bg-gray-100 border border-gray-200 rounded-full py-2 pl-10 pr-4 text-xs focus:outline-none focus:border-rose-500">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-gray-400 text-xs"></i>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden border-t border-gray-100 bg-white px-4 py-3 space-y-2">
+            <button onclick="filterCategory('all')" class="block w-full text-left py-2 text-sm font-medium text-gray-700 hover:text-rose-600">All Deals</button>
+            <button onclick="filterCategory('dresses')" class="block w-full text-left py-2 text-sm font-medium text-gray-700 hover:text-rose-600">Dresses</button>
+            <button onclick="filterCategory('sarees')" class="block w-full text-left py-2 text-sm font-medium text-gray-700 hover:text-rose-600">Sarees</button>
+            <button onclick="filterCategory('shoes')" class="block w-full text-left py-2 text-sm font-medium text-gray-700 hover:text-rose-600">Footwear & Shoes</button>
+            <button onclick="filterCategory('cutlery')" class="block w-full text-left py-2 text-sm font-medium text-gray-700 hover:text-rose-600">Kitchen & Cutlery</button>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="bg-gradient-to-r from-rose-50 via-pink-50 to-amber-50 py-12 px-4 sm:px-6 lg:px-8 border-b border-rose-100/50">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div class="space-y-4 text-center md:text-left">
+                <span class="inline-block px-3 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-bold uppercase tracking-wider">
+                    Exclusive Affiliate Discount Hub
+                </span>
+                <h1 class="text-3xl sm:text-5xl font-extrabold text-gray-900 leading-tight">
+                    Best Deals On <br/>
+                    <span class="bg-gradient-to-r from-rose-600 to-pink-600 bg-clip-text text-transparent">Women's Style & Home</span>
+                </h1>
+                <p class="text-gray-600 text-sm sm:text-base max-w-lg">
+                    Discover handpicked affiliate deals on trending dresses, ethnic sarees, stylish footwear, and premium kitchen cutlery from Amazon, Myntra & Flipkart.
+                </p>
+                <div class="pt-2 flex flex-wrap gap-3 justify-center md:justify-start">
+                    <a href="#products-section" class="px-6 py-3 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-sm shadow-lg shadow-rose-600/30 transition-all">
+                        Explore Deals <i class="fa-solid fa-arrow-down ml-1"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="flex justify-center">
+                <div class="grid grid-cols-2 gap-3 max-w-sm w-full">
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow">
+                        <i class="fa-solid fa-vest text-rose-500 text-3xl mb-2"></i>
+                        <div class="text-xs font-bold">Women Dresses</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow">
+                        <i class="fa-solid fa-shirt text-pink-500 text-3xl mb-2"></i>
+                        <div class="text-xs font-bold">Designer Sarees</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow">
+                        <i class="fa-solid fa-shoe-prints text-amber-500 text-3xl mb-2"></i>
+                        <div class="text-xs font-bold">Footwear & Heels</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow">
+                        <i class="fa-solid fa-utensils text-emerald-500 text-3xl mb-2"></i>
+                        <div class="text-xs font-bold">Kitchen Cutlery</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Products Section -->
+    <main id="products-section" class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
+        
+        <!-- Category Filters Pill Buttons -->
+        <div class="flex items-center justify-between mb-8 overflow-x-auto pb-2 custom-scrollbar">
+            <div class="flex gap-2" id="filter-buttons">
+                <button onclick="filterCategory('all', event)" class="cat-btn active px-5 py-2 rounded-full text-xs font-bold bg-rose-600 text-white transition-all shadow-sm">All Deals</button>
+                <button onclick="filterCategory('dresses', event)" class="cat-btn px-5 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border border-gray-200 hover:bg-gray-100 transition-all">Dresses</button>
+                <button onclick="filterCategory('sarees', event)" class="cat-btn px-5 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border border-gray-200 hover:bg-gray-100 transition-all">Sarees</button>
+                <button onclick="filterCategory('shoes', event)" class="cat-btn px-5 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border border-gray-200 hover:bg-gray-100 transition-all">Shoes & Heels</button>
+                <button onclick="filterCategory('cutlery', event)" class="cat-btn px-5 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border border-gray-200 hover:bg-gray-100 transition-all">Kitchen Cutlery</button>
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="productGrid">
+            <!-- Dynamic JavaScript Rendered Products Will Appear Here -->
+        </div>
+
+        <!-- Empty State Message -->
+        <div id="noResults" class="hidden text-center py-16">
+            <i class="fa-solid fa-box-open text-gray-300 text-5xl mb-3"></i>
+            <h3 class="text-lg font-bold text-gray-700">Koi Product Nahi Mila</h3>
+            <p class="text-xs text-gray-500">Kripya koi dusra keyword ya category try karein.</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-10 border-t border-gray-800 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+                <h4 class="text-white font-bold text-sm mb-3">HerFashionFinds</h4>
+                <p class="leading-relaxed">
+                    Aapka trusted affiliate platform jahan aapko Women's Dresses, Ethnic Sarees, Footwear, aur Cutlery par Amazon & Flipkart ke best deals milte hain.
+                </p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-sm mb-3">Quick Categories</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" onclick="filterCategory('dresses')" class="hover:text-white transition-colors">Women's Floral & Party Dresses</a></li>
+                    <li><a href="#" onclick="filterCategory('sarees')" class="hover:text-white transition-colors">Traditional & Silk Sarees</a></li>
+                    <li><a href="#" onclick="filterCategory('shoes')" class="hover:text-white transition-colors">Heels, Sandals & Footwear</a></li>
+                    <li><a href="#" onclick="filterCategory('cutlery')" class="hover:text-white transition-colors">Stainless Steel Cutlery Sets</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-sm mb-3">Affiliate Disclaimer</h4>
+                <p class="leading-relaxed">
+                    HerFashionFinds Amazon Associates aur dusre affiliate networks ka participant hai. Jab aap hamare link se buy karte hain, humein chhota commission mil sakta hai bina aapke extra charge ke.
+                </p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-6 border-t border-gray-800">
+            &copy; 2026 HerFashionFinds. All Rights Reserved. Built with Tailwind CSS.
+        </div>
+    </footer>
+
+    <!-- JavaScript Data & Logic -->
+    <script>
+        // Sample Products Array (Cutlery, Sarees, Dresses & Footwear Included)
+        const products = [
+            {
+                id: 1,
+                title: "Women Floral Printed A-Line Maxi Dress",
+                category: "dresses",
+                price: "₹799",
+                originalPrice: "₹1,999",
+                discount: "60% OFF",
+                store: "Amazon",
+                image: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=600&q=80",
+                affiliateUrl: "https://www.amazon.in/?tag=YOUR_AFFILIATE_TAG"
+            },
+            {
+                id: 2,
+                title: "Soft Kanjivaram Silk Saree with Blouse Piece",
+                category: "sarees",
+                price: "₹1,299",
+                originalPrice: "₹3,999",
+                discount: "67% OFF",
+                store: "Flipkart",
+                image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=600&q=80",
+                affiliateUrl: "https://www.flipkart.com/?affid=YOUR_AFFILIATE_TAG"
+            },
+            {
+                id: 3,
+                title: "Block Heel Sandals for Women (Nude & Pink)",
+                category: "shoes",
+                price: "₹699",
+                originalPrice: "₹1,499",
+                discount: "53% OFF",
+                store: "Myntra",
+                image: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&q=80",
+                affiliateUrl: "https://www.myntra.com"
+            },
+            {
+                id: 4,
+                title: "24-Piece Stainless Steel Cutlery Spoon Set with Stand",
+                category: "cutlery",
+                price: "₹899",
+                originalPrice: "₹1,899",
+                discount: "52% OFF",
+                store: "Amazon",
+                image: "https://images.unsplash.com/photo-1584345604476-8ec5e12e42dd?auto=format&fit=crop&w=600&q=80",
+                affiliateUrl: "https://www.amazon.in/?tag=YOUR_AFFILIATE_TAG"
+            },
+            {
+                id: 5,
+                title: "Cotton Casual Summer Dress for Women",
+                category: "dresses",
+                price: "₹599",
+                originalPrice: "₹1,299",
+                discount: "54% OFF",
+                store: "Amazon",
+                image: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&w=600&q=80",
+                affiliateUrl: "https://www.amazon.in/?tag=YOUR_AFFILIATE_TAG"
+            },
+            {
+                id: 6,
+                title: "Georgette Designer Printed Saree",
+                category: "sarees",
+                price: "₹899",
+                originalPrice: "₹2,499",
+                discount: "64% OFF",
+                store: "Flipkart",
+                image: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=600&q=80",
+                affiliateUrl: "https://www.flipkart.com"
+            },
+            {
+                id: 7,
+                title: "Gold-Plated Luxury Dinner Forks & Knives Set",
+                category: "cutlery",
+                price: "₹1,499",
+                originalPrice: "₹2,999",
+                discount: "50% OFF",
+                store: "Amazon",
+                image: "https://images.unsplash.com/photo-1615865417236-d67f572023d8?auto=format&fit=crop&w=600&q=80",
+                affiliateUrl: "https://www.amazon.in/?tag=YOUR_AFFILIATE_TAG"
+            },
+            {
+                id: 8,
+                title: "Comfortable Women White Casual Sneakers",
+                category: "shoes",
+                price: "₹999",
+                originalPrice: "₹2,199",
+                discount: "55% OFF",
+                store: "Myntra",
+                image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=600&q=80",
+                affiliateUrl: "https://www.myntra.com"
+            }
+        ];
+
+        // Mobile Menu Toggle Logic
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Function to Render Products
+        function renderProducts(items) {
+            const grid = document.getElementById('productGrid');
+            const noResults = document.getElementById('noResults');
+
+            grid.innerHTML = '';
+
+            if (items.length === 0) {
+                noResults.classList.remove('hidden');
+                return;
+            } else {
+                noResults.classList.add('hidden');
+            }
+
+            items.forEach(product => {
+                const card = `
+                    <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
+                        <div class="relative overflow-hidden aspect-square bg-gray-100">
+                            <img src="${product.image}" alt="${product.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 left-3 bg-rose-600 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                                ${product.discount}
+                            </span>
+                            <span class="absolute top-3 right-3 bg-gray-900/80 backdrop-blur-md text-white text-[10px] font-semibold px-2 py-0.5 rounded">
+                                ${product.store}
+                            </span>
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow justify-between">
+                            <div>
+                                <span class="text-[10px] uppercase font-bold text-rose-500 tracking-wider">${product.category}</span>
+                                <h3 class="text-sm font-semibold text-gray-800 mt-1 line-clamp-2 leading-snug hover:text-rose-600 transition-colors">
+                                    ${product.title}
+                                </h3>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between">
+                                <div>
+                                    <span class="text-base font-extrabold text-gray-900">${product.price}</span>
+                                    <span class="text-xs text-gray-400 line-through ml-1">${product.originalPrice}</span>
+                                </div>
+                                <a href="${product.affiliateUrl}" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold rounded-xl shadow-md shadow-rose-600/20 transition-all flex items-center gap-1.5">
+                                    Buy Now <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += card;
+            });
+        }
+
+        // Category Filter Logic
+        function filterCategory(category, event) {
+            if (event) {
+                document.querySelectorAll('.cat-btn').forEach(btn => {
+                    btn.classList.remove('bg-rose-600', 'text-white');
+                    btn.classList.add('bg-white', 'text-gray-700', 'border', 'border-gray-200');
+                });
+                event.target.classList.remove('bg-white', 'text-gray-700', 'border', 'border-gray-200');
+                event.target.classList.add('bg-rose-600', 'text-white');
+            }
+
+            if (category === 'all') {
+                renderProducts(products);
+            } else {
+                const filtered = products.filter(p => p.category === category);
+                renderProducts(filtered);
+            }
+        }
+
+        // Search Functionality
+        function searchProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = products.filter(p => p.title.toLowerCase().includes(query) || p.category.toLowerCase().includes(query));
+            renderProducts(filtered);
+        }
+
+        function searchProductsMobile() {
+            const query = document.getElementById('mobileSearchInput').value.toLowerCase();
+            const filtered = products.filter(p => p.title.toLowerCase().includes(query) || p.category.toLowerCase().includes(query));
+            renderProducts(filtered);
+        }
+
+        // Initial Render
+        renderProducts(products);
+    </script>
+</body>
+</html>
